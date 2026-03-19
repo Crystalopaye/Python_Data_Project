@@ -96,6 +96,7 @@ fig.suptitle("What is the Likelihood of Skills Requested in US job postings", fo
 plt.tight_layout()  # Fix the overlap
 plt.show()
 ```
+
 Results
 
 ![Skills Demand Plot](3_Project/images/likelihood_of_skills_demand_in_us_jobs.png)
@@ -110,3 +111,46 @@ Results
 
 - Data Scientists prioritize Python above all (72%) , establishing it as the undisputed lingua franca of advanced analytics. SQL (51%) remains critical for data extraction, while R (44%) maintains a strong foothold, suggesting a continued appreciation for statistical computing. The lower but meaningful demand for SAS and Tableau (both 24%) indicates that while specialized tools matter, foundational programming and database skills remain paramount.
 
+### 2. How are skill requirements trending for Data Analysts over time?
+To analyze skill trends for Data Analysts throughout 2023, I filtered for data analyst roles and aggregated required skills by posting month. This longitudinal analysis tracks the monthly prevalence of the top five skills, revealing their popularity trajectories over the year.
+
+View my notebook with detailed steps here: [3_Skills_Trend](3_Project/3_Skills_Trend.ipynb)
+
+Data Visualization
+```python
+df_plot = df_DA_US_percent.iloc[:, :5]
+
+sns.lineplot(data=df_plot, dashes=False, palette="tab10")
+sns.set_theme(style="ticks")
+sns.despine()
+
+plt.title("Trending Top Skills for Data Analysts in the US")
+plt.ylabel("Likelihood in Job Posting")
+plt.xlabel("2023")
+plt.legend().remove()
+
+from matplotlib.ticker import PercentFormatter
+ax = plt.gca()
+ax.yaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+for i in range(5):
+    plt.text(11.2, df_plot.iloc[-1, i], df_plot.columns[i])
+
+plt.show()
+```
+
+Results
+
+![Skills Trend Plot](/3_Project/images/Trending_Top_Skills_for_DA_in%20the%20US.png)
+
+*Bar graph visualizing the trending top skills for data analysts in the US in 2023.*
+
+**Insights:**
+
+- SQL maintains dominance but shows a gradual decline throughout 2023, dropping from 64% in January to 48% by December—a 16 percentage point decrease. Despite this downward trend, SQL remains the most requested skill every month, reinforcing its foundational importance for Data Analysts even as the skill landscape diversifies.
+
+- Tableau experiences remarkable growth mid-year, surging from 25% in January to a peak of 45% in July—an 80% increase in demand. This dramatic rise suggests a mid-2023 shift toward prioritizing data visualization expertise, though it moderates slightly in subsequent months while remaining elevated above年初 levels.
+
+- Python and Excel show remarkable stability throughout the year, with Python consistently hovering between 33-39% and Excel maintaining a steady 41-49% range. This consistency indicates these tools have become baseline expectations for Data Analysts, while Power BI shows modest but steady growth—climbing from 18% to 25% by year-end—suggesting increasing adoption of Microsoft's visualization platform.
+
+### 3. How well do jobs and skills pay for Data Analysts?
