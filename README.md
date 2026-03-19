@@ -66,7 +66,7 @@ Each Jupyter notebook for this project aimed at investigating specific aspects o
 ### 1. What are the most in-demand skills for the top three most popular data roles?
 To identify the most sought-after skills for leading data roles, I isolated the top three most frequently posted positions and extracted their five most common required skills. This targeted analysis reveals the key competencies needed for each career path, enabling strategic skill development based on specific role aspirations.
 
-View my notebook with detailed steps here:[ 2_Skill_Demand.](3_Project\2_Skill_Demand.ipynb)
+View my notebook with detailed steps here:[ 2_Skill_Demand.](3_Project/2_Skill_Demand.ipynb)
 
 Data Visualization
 ```python
@@ -97,7 +97,9 @@ plt.tight_layout()  # Fix the overlap
 plt.show()
 ```
 Results
+
 ![Skills Demand Plot](3_Project/images/likelihood_of_skills_demand_in_us_jobs.png)
+
 *Bar graph visualizing the salary for the top 3 data roles and their top 5 skills associated with each.*
 
 **Insights:**
