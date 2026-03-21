@@ -248,3 +248,139 @@ Insights:
 
 
 ### 4. What are the most optimal skills to learn for Data Analysts?
+
+To identify the most optimal skills to learn—those offering the best balance of high demand and high compensation—I calculated each skill's demand percentage alongside its median salary. This dual-metric approach enables clear identification of skills that maximize both employability and earning potential.
+
+View my notebook with detailed steps here: [5_Optimal_skills](/3_Project/5_Optimal_Skills.ipynb)
+
+Data Visualization
+```python
+from adjustText import adjust_text
+
+df_DA_skills_high_demand.plot(kind='scatter', x='skill_percent', y='median_salary')
+
+texts = []
+for i, txt in enumerate(df_DA_skills_high_demand.index):
+    texts.append(plt.text(df_DA_skills_high_demand['skill_percent'].iloc[i], df_DA_skills_high_demand['median_salary'].iloc[i], txt))
+
+adjust_text(texts, arrowprops=dict(arrowstyle="->", color="gray", lw=1))
+
+# Get the axes to run format
+# fig, ax = plt.subplots()
+from matplotlib.ticker import PercentFormatter
+ax = plt.gca()
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, pos: f"${int(y/1000)}K"))
+ax.xaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+# Set axis labels, title and legend
+plt.xlabel('Percent of Data Analyst Jobs')
+plt.ylabel('Median Yearly Salary')
+plt.title("Most Optimal Skills for Data Analysts in the US")
+
+# Adjust Layout and display the plot
+plt.tight_layout()
+plt.show()
+```
+
+Results
+
+![Most Optimal Skills for Data Analysts](/3_Project/images/optimal_skills_1.png)
+
+*A scatter plot visualizing the most optimal skills (high paying & high demand) for data analysts in the US.*
+
+Insights
+
+- Excel leads in demand but trails in salary potential, appearing in 42% of Data Analyst job postings—the highest among all skills—yet its median salary of $84K falls below the higher-compensation tier. This reinforces Excel's role as a baseline requirement rather than a salary differentiator.
+
+- Python and Tableau emerge as the most strategic skills to learn, combining strong demand (32% and 33%, respectively) with top-tier median salaries ($97K and $93K). This dual strength positions them as the optimal balance between employability and earning potential for aspiring Data Analysts.
+
+- SQL Server and SAS offer niche value with competitive pay, showing moderate demand (15% and 29%) alongside solid median salaries ($91K and $90K). While not as widely requested as Excel or Power BI, these skills command comparable compensation to Python—suggesting they serve as valuable differentiators in specialized or enterprise-focused roles.
+
+#### Visualizing Different Technologies
+
+Let's visualize the different technologies as well in the graph. We'll add color labels based on the technology (e.g., {Programming: Python})
+
+Data Visualization
+
+```python
+from adjustText import adjust_text
+
+# df_plot.plot(kind='scatter', x='skill_percent', y='median_salary')
+sns.scatterplot(
+    data=df_plot,
+    x="skill_percent",
+    y="median_salary",
+    hue="technology"
+)
+
+sns.despine()
+sns.set_theme(style="ticks")
+
+texts = []
+for i, txt in enumerate(df_DA_skills_high_demand.index):
+    texts.append(plt.text(df_DA_skills_high_demand['skill_percent'].iloc[i], df_DA_skills_high_demand['median_salary'].iloc[i], txt))
+
+adjust_text(texts, arrowprops=dict(arrowstyle="->", color="gray", lw=1))
+
+# Get the axes to run format
+# fig, ax = plt.subplots()
+from matplotlib.ticker import PercentFormatter
+ax = plt.gca()
+ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, pos: f"${int(y/1000)}K"))
+ax.xaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+# Set axis labels, title and legend
+plt.xlabel('Percent of Data Analyst Jobs')
+plt.ylabel('Median Yearly Salary')
+plt.title("Most Optimal Skills for Data Analysts in the US")
+
+# Adjust Layout and display the plot
+plt.tight_layout()
+plt.show()
+```
+
+Result
+
+![Visualizing different technologies](/3_Project/images/optimal_skills_2.png)
+
+*A scatter plot visualizing the most optimal skills (high paying & high demand) for data analysts in the US with color labels for technology.*
+
+Insights:
+
+- Excel maintains the highest demand but the lowest salary among all skill categories, appearing in 42% of Data Analyst job postings while commanding a median salary of just $84K. This reinforces that while Excel is a near-universal expectation, it does not serve as a primary driver for higher compensation.
+
+- Python, Analyst Tools, and Programming demonstrate the strongest combination of demand and salary, each showing robust demand (28%, 40%, and 38% respectively) alongside competitive median salaries ranging from $91K to $99K. These categories represent the sweet spot for career-focused Data Analysts seeking both job availability and strong earning potential.
+
+- Cloud and Database skills offer high-value specialization opportunities, with median salaries of $91K and $93K despite lower overall demand (25% and 22%). This suggests that while these skills are not as widely required as Python or Tableau, they command premium compensation and can serve as strategic differentiators for candidates targeting higher-paying roles.
+
+## What I learned
+Throughout this project, I deepened my understanding of the data analyst job market while sharpening my technical skills in Python—particularly in data manipulation and visualization. Here are a few key takeaways:
+
+- Advanced Python Proficiency: Leveraging libraries such as Pandas for data wrangling, along with Matplotlib and Seaborn for visualization, enabled me to execute complex analytical tasks efficiently and effectively.
+
+- The Critical Role of Data Cleaning: I learned that thorough data cleaning and preparation are foundational to any meaningful analysis. Ensuring data quality directly impacts the accuracy and reliability of the insights derived.
+
+- Strategic Skill Alignment: This project underscored the importance of aligning technical skills with market demand. By analyzing the intersection of skill popularity, salary, and job availability, I gained valuable insights for making informed, strategic career decisions in the evolving data industry.
+
+## Insights
+This project revealed several key insights into the data analyst job market:
+
+- Skill Demand and Salary Correlation: A clear relationship exists between the demand for specific skills and the salaries they command. Advanced, specialized skills such as Python and SQL Server consistently align with higher compensation, underscoring the value of technical depth.
+
+- Evolving Market Trends: Skill demand is dynamic and shifts throughout the year, reflecting the ever-changing nature of the data job market. Staying attuned to these trends is essential for data analysts seeking to remain competitive and pursue strategic career growth.
+
+- Economic Value of Skills: Identifying skills that are both in high demand and well-compensated enables data analysts to make informed decisions about where to focus their learning efforts. Prioritizing these high-value skills maximizes both employability and earning potential.
+
+## Challenges
+This project presented several challenges that ultimately became valuable learning opportunities:
+
+- Data Inconsistencies: Handling missing, incomplete, or inconsistent data entries required meticulous attention and robust data-cleaning techniques. Ensuring data integrity was essential to producing reliable and trustworthy insights.
+
+- Complex Data Visualization: Designing clear and compelling visual representations of complex datasets proved challenging yet critical. Effectively communicating nuanced findings through visuals demanded thoughtful choices in chart selection, formatting, and storytelling.
+
+- Balancing Breadth and Depth: Striking the right balance between exploring broad market trends and diving deep into specific analyses required constant recalibration. Maintaining comprehensive coverage without becoming overwhelmed by details was a key challenge throughout the project.
+
+## Conclusion
+This exploration into the data analyst job market provided valuable clarity on the skills and trends shaping this dynamic field. By analyzing the intersection of demand, salary, and skill evolution, I gained actionable insights that not only inform my own career development but also offer strategic guidance for data professionals navigating this competitive landscape.
+
+As the data industry continues to evolve at a rapid pace, ongoing analysis and continuous learning will be essential to staying ahead. This project serves as a strong foundation for future explorations—reinforcing that adaptability, technical proficiency, and a data-driven approach to career planning are key to long-term success in the field.
